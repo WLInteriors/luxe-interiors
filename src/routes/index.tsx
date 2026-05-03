@@ -203,12 +203,11 @@ function HomePage() {
       {/* THE DIFFERENCE — split, image dominant */}
       <section className="bg-background">
         <div className="grid lg:grid-cols-12 items-stretch min-h-[640px]">
-          <div className="lg:col-span-7 relative">
+          <div className="lg:col-span-7 relative min-h-[420px] lg:min-h-[640px]">
             <Placeholder
               label="Custom millwork shop photo"
               tone="dark"
-              className="!h-full min-h-[420px]"
-              ratio="16/10"
+              fill
             />
           </div>
           <div className="lg:col-span-5 flex items-center bg-charcoal text-charcoal-foreground px-8 md:px-16 lg:px-20 py-20 lg:py-0">
