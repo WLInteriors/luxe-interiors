@@ -28,10 +28,10 @@ export function Reveal({ children, className = "", delay = 0, as: Tag = "div" }:
     return () => obs.disconnect();
   }, [delay]);
 
+  const Component = Tag as React.ElementType;
   return (
-    // @ts-expect-error - dynamic tag
-    <Tag ref={ref} className={`reveal ${className}`}>
+    <Component ref={ref} className={`reveal ${className}`}>
       {children}
-    </Tag>
+    </Component>
   );
 }
