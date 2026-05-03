@@ -77,14 +77,14 @@ function Page() {
 
   return (
     <>
-      <section className="pt-32 pb-12 bg-charcoal text-charcoal-foreground">
-        <div className="container-luxe">
+      <section className="pt-36 md:pt-44 pb-16 md:pb-20 bg-charcoal text-charcoal-foreground">
+        <div className="container-wide">
           <Reveal>
-            <p className="eyebrow mb-6">Begin a Project</p>
-            <h1 className="font-serif text-5xl md:text-7xl max-w-3xl leading-[1.05]">
-              Schedule a private consultation.
+            <p className="eyebrow text-white/80 mb-6">Begin a Project</p>
+            <h1 className="display-serif text-[clamp(2.5rem,7vw,6rem)] max-w-4xl">
+              Request an estimate.
             </h1>
-            <p className="mt-6 text-lg text-white/70 max-w-xl">
+            <p className="mt-8 text-base md:text-lg text-white/70 max-w-2xl leading-relaxed">
               Tell us about your project. A principal will be in touch within two business days.
             </p>
           </Reveal>
