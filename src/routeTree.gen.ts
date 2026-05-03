@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WhoWeWorkWithRouteImport } from './routes/who-we-work-with'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesInteriorRenovationsRouteImport } from './routes/services.interior-renovations'
+import { Route as ServicesCustomMillworkRouteImport } from './routes/services.custom-millwork'
+import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
+import { Route as PortfolioBeforeAfterRouteImport } from './routes/portfolio.before-after'
 
+const WhoWeWorkWithRoute = WhoWeWorkWithRouteImport.update({
+  id: '/who-we-work-with',
+  path: '/who-we-work-with',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesInteriorRenovationsRoute =
+  ServicesInteriorRenovationsRouteImport.update({
+    id: '/services/interior-renovations',
+    path: '/services/interior-renovations',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesCustomMillworkRoute = ServicesCustomMillworkRouteImport.update({
+  id: '/services/custom-millwork',
+  path: '/services/custom-millwork',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCommercialRoute = ServicesCommercialRouteImport.update({
+  id: '/services/commercial',
+  path: '/services/commercial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioBeforeAfterRoute = PortfolioBeforeAfterRouteImport.update({
+  id: '/before-after',
+  path: '/before-after',
+  getParentRoute: () => PortfolioRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/portfolio': typeof PortfolioRouteWithChildren
+  '/who-we-work-with': typeof WhoWeWorkWithRoute
+  '/portfolio/before-after': typeof PortfolioBeforeAfterRoute
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/custom-millwork': typeof ServicesCustomMillworkRoute
+  '/services/interior-renovations': typeof ServicesInteriorRenovationsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/portfolio': typeof PortfolioRouteWithChildren
+  '/who-we-work-with': typeof WhoWeWorkWithRoute
+  '/portfolio/before-after': typeof PortfolioBeforeAfterRoute
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/custom-millwork': typeof ServicesCustomMillworkRoute
+  '/services/interior-renovations': typeof ServicesInteriorRenovationsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/portfolio': typeof PortfolioRouteWithChildren
+  '/who-we-work-with': typeof WhoWeWorkWithRoute
+  '/portfolio/before-after': typeof PortfolioBeforeAfterRoute
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/custom-millwork': typeof ServicesCustomMillworkRoute
+  '/services/interior-renovations': typeof ServicesInteriorRenovationsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/portfolio'
+    | '/who-we-work-with'
+    | '/portfolio/before-after'
+    | '/services/commercial'
+    | '/services/custom-millwork'
+    | '/services/interior-renovations'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/portfolio'
+    | '/who-we-work-with'
+    | '/portfolio/before-after'
+    | '/services/commercial'
+    | '/services/custom-millwork'
+    | '/services/interior-renovations'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/portfolio'
+    | '/who-we-work-with'
+    | '/portfolio/before-after'
+    | '/services/commercial'
+    | '/services/custom-millwork'
+    | '/services/interior-renovations'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  PortfolioRoute: typeof PortfolioRouteWithChildren
+  WhoWeWorkWithRoute: typeof WhoWeWorkWithRoute
+  ServicesCommercialRoute: typeof ServicesCommercialRoute
+  ServicesCustomMillworkRoute: typeof ServicesCustomMillworkRoute
+  ServicesInteriorRenovationsRoute: typeof ServicesInteriorRenovationsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/who-we-work-with': {
+      id: '/who-we-work-with'
+      path: '/who-we-work-with'
+      fullPath: '/who-we-work-with'
+      preLoaderRoute: typeof WhoWeWorkWithRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/interior-renovations': {
+      id: '/services/interior-renovations'
+      path: '/services/interior-renovations'
+      fullPath: '/services/interior-renovations'
+      preLoaderRoute: typeof ServicesInteriorRenovationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/custom-millwork': {
+      id: '/services/custom-millwork'
+      path: '/services/custom-millwork'
+      fullPath: '/services/custom-millwork'
+      preLoaderRoute: typeof ServicesCustomMillworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/commercial': {
+      id: '/services/commercial'
+      path: '/services/commercial'
+      fullPath: '/services/commercial'
+      preLoaderRoute: typeof ServicesCommercialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/before-after': {
+      id: '/portfolio/before-after'
+      path: '/before-after'
+      fullPath: '/portfolio/before-after'
+      preLoaderRoute: typeof PortfolioBeforeAfterRouteImport
+      parentRoute: typeof PortfolioRoute
+    }
   }
 }
 
+interface PortfolioRouteChildren {
+  PortfolioBeforeAfterRoute: typeof PortfolioBeforeAfterRoute
+}
+
+const PortfolioRouteChildren: PortfolioRouteChildren = {
+  PortfolioBeforeAfterRoute: PortfolioBeforeAfterRoute,
+}
+
+const PortfolioRouteWithChildren = PortfolioRoute._addFileChildren(
+  PortfolioRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  PortfolioRoute: PortfolioRouteWithChildren,
+  WhoWeWorkWithRoute: WhoWeWorkWithRoute,
+  ServicesCommercialRoute: ServicesCommercialRoute,
+  ServicesCustomMillworkRoute: ServicesCustomMillworkRoute,
+  ServicesInteriorRenovationsRoute: ServicesInteriorRenovationsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
