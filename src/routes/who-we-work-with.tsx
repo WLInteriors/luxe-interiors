@@ -154,6 +154,12 @@ function Page() {
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-10 inline-flex items-center gap-3 px-5 py-3 border border-gold/40 bg-gold/5">
+                    <span className="w-1.5 h-1.5 bg-gold rounded-full" />
+                    <span className="text-[11px] tracking-[0.25em] uppercase font-medium text-foreground">
+                      {p.proof}
+                    </span>
+                  </div>
                 </Reveal>
               </div>
             </div>
