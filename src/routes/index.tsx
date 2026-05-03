@@ -276,6 +276,64 @@ function HomePage() {
         </div>
       </section>
 
+      {/* TESTIMONIALS / CREDIBILITY */}
+      <section className="bg-background py-28 md:py-36">
+        <div className="container-wide">
+          <Reveal className="max-w-3xl mb-16">
+            <p className="eyebrow mb-4">In Their Words</p>
+            <h2 className="display-serif text-[clamp(2rem,4vw,3.5rem)] leading-[1.05]">
+              Trusted by the people<br />who can&rsquo;t afford to be wrong.
+            </h2>
+          </Reveal>
+
+          <div className="grid gap-px bg-border md:grid-cols-3">
+            {[
+              {
+                q: "They protected our design intent through every RFI. The millwork came out exactly as drawn — which almost never happens.",
+                a: "Principal Architect",
+                f: "AIA-member firm, Greenwich CT",
+              },
+              {
+                q: "Fixed price held. Schedule held. Our neighbors never complained once. That alone is worth the premium.",
+                a: "Homeowner",
+                f: "Bronxville NY · 2024 whole-home",
+              },
+              {
+                q: "COIs in twelve hours, OSHA-30 supervisor on site every day. Our board approved them on the spot.",
+                a: "Managing Agent",
+                f: "Park Avenue co-op",
+              },
+            ].map((t, i) => (
+              <Reveal key={i} delay={i * 100} className="bg-background p-10 md:p-12 flex flex-col">
+                <span className="font-serif text-5xl text-gold leading-none mb-6">&ldquo;</span>
+                <p className="text-lg leading-relaxed text-foreground flex-1">{t.q}</p>
+                <div className="mt-8 pt-6 border-t border-border">
+                  <p className="font-serif text-base">{t.a}</p>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mt-1">{t.f}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-6 gap-px bg-border border border-border">
+            {[
+              "Licensed GC · NY/CT/NJ",
+              "MBE / DBE Certified",
+              "SCA Prequalified",
+              "AIA Industry Partner",
+              "OSHA 30 Supervisors",
+              "5-Year Warranty",
+            ].map((c) => (
+              <div key={c} className="bg-background py-6 px-4 text-center">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground leading-relaxed">
+                  {c}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PROCESS PREVIEW — dark editorial */}
       <section className="bg-charcoal text-charcoal-foreground py-28 md:py-36">
         <div className="container-luxe">

@@ -5,10 +5,57 @@ interface PlaceholderProps {
   className?: string;
   tone?: "light" | "mid" | "dark" | "warm";
   ratio?: string; // e.g. "4/5", "16/10"
-  src?: string;   // optional real image; label still overlays as a corner tag
+  src?: string;   // optional real image override
   alt?: string;
   fill?: boolean; // absolutely fill nearest positioned ancestor
+  showTag?: boolean; // show the small label tag on top of the image
 }
+
+/**
+ * Curated high-end architectural photography (Unsplash) keyed by the same
+ * descriptive label strings used throughout the site. Adding a new label
+ * here automatically lights up real imagery in every section that requests it.
+ */
+const LABEL_IMAGES: Record<string, string> = {
+  "Hero project photo":
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
+  "Custom millwork shop photo":
+    "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=2000&q=80",
+  "Before renovation photo":
+    "https://images.unsplash.com/photo-1503594384566-461fe158e797?auto=format&fit=crop&w=2000&q=80",
+  "After renovation photo":
+    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80",
+  "Kitchen/casework detail":
+    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=80",
+  "Bathroom vanity/millwork detail":
+    "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=2000&q=80",
+  "Commercial interior photo":
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80",
+  "Radiator cover photo":
+    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=2000&q=80",
+  "AC cover photo":
+    "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=2000&q=80",
+  "Team/shop/process photo":
+    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=2000&q=80",
+  "Hotel interior photo":
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=80",
+  "Boutique hotel lobby":
+    "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=2000&q=80",
+  "School interior photo":
+    "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=2000&q=80",
+  "Architect drawings":
+    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=80",
+  "Library millwork":
+    "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=2000&q=80",
+  "Wood paneling detail":
+    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=2000&q=80",
+  "Marble kitchen":
+    "https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=2000&q=80",
+  "Living room interior":
+    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80",
+  "Office interior":
+    "https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=2000&q=80",
+};
 
 const toneStyles: Record<NonNullable<PlaceholderProps["tone"]>, CSSProperties> = {
   light: {
@@ -43,14 +90,16 @@ export function Placeholder({
   src,
   alt,
   fill = false,
+  showTag = false,
 }: PlaceholderProps) {
+  const resolvedSrc = src ?? LABEL_IMAGES[label];
+
   const style: CSSProperties = {
     ...(ratio && !fill ? { aspectRatio: ratio.replace("/", " / ") } : {}),
-    ...(src ? {} : toneStyles[tone]),
+    ...(resolvedSrc ? {} : toneStyles[tone]),
   };
 
-  const isDark = tone === "dark" || tone === "mid" || !!src;
-
+  const isDark = tone === "dark" || tone === "mid" || !!resolvedSrc;
   const positionClass = fill ? "absolute inset-0 w-full h-full" : "relative w-full";
 
   return (
@@ -60,16 +109,15 @@ export function Placeholder({
       role="img"
       aria-label={alt ?? label}
     >
-      {src ? (
+      {resolvedSrc ? (
         <img
-          src={src}
+          src={resolvedSrc}
           alt={alt ?? label}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
           loading="lazy"
         />
       ) : (
         <>
-          {/* Architectural cross-hairs */}
           <svg
             className="absolute inset-0 w-full h-full opacity-[0.08]"
             preserveAspectRatio="none"
@@ -87,17 +135,19 @@ export function Placeholder({
         </>
       )}
 
-      {/* Label tag */}
-      <div
-        className={`absolute left-4 top-4 z-10 inline-flex items-center gap-2 px-3 py-1.5 backdrop-blur-md text-[9px] tracking-[0.28em] uppercase font-medium ${
-          isDark
-            ? "bg-black/45 text-white/90 border border-white/15"
-            : "bg-white/80 text-foreground border border-black/10"
-        }`}
-      >
-        <span className="w-1 h-1 bg-gold rounded-full" />
-        {label}
-      </div>
+      {showTag && (
+        <div
+          className={`absolute left-4 top-4 z-10 inline-flex items-center gap-2 px-3 py-1.5 backdrop-blur-md text-[9px] tracking-[0.28em] uppercase font-medium ${
+            isDark
+              ? "bg-black/45 text-white/90 border border-white/15"
+              : "bg-white/80 text-foreground border border-black/10"
+          }`}
+        >
+          <span className="w-1 h-1 bg-gold rounded-full" />
+          {label}
+        </div>
+      )}
     </div>
   );
 }
+
