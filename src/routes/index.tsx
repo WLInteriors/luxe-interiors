@@ -104,7 +104,7 @@ function HomePage() {
         </div>
 
         {/* Hero meta strip */}
-        <div className="absolute bottom-0 inset-x-0 z-10 border-t border-white/15 bg-charcoal/40 backdrop-blur-md hidden md:block">
+        <div className="absolute bottom-0 inset-x-0 z-10 border-t border-white/15 bg-charcoal/40 backdrop-blur-md">
           <div className="container-wide grid grid-cols-4 divide-x divide-white/10 text-white/80">
             {[
               ["38", "Years building"],
