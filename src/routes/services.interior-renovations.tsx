@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
+import { Placeholder } from "@/components/placeholder";
 
 export const Route = createFileRoute("/services/interior-renovations")({
   head: () => ({
@@ -15,17 +16,17 @@ export const Route = createFileRoute("/services/interior-renovations")({
 });
 
 const focuses = [
-  { title: "Gourmet Kitchens", img: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80", body: "Marble, quartzite, and bespoke cabinetry built to withstand a generation of use." },
-  { title: "Spa Baths", img: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80", body: "Honed stone, custom vanities, radiant heat — sanctuaries engineered for stillness." },
-  { title: "Additions", img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80", body: "Seamless extensions that read as if they were always part of the original architecture." },
+  { title: "Gourmet Kitchens", label: "Kitchen/casework detail", tone: "light" as const, body: "Marble, quartzite, and bespoke cabinetry built to withstand a generation of use." },
+  { title: "Spa Baths", label: "Bathroom vanity/millwork detail", tone: "warm" as const, body: "Honed stone, custom vanities, radiant heat — sanctuaries engineered for stillness." },
+  { title: "Additions", label: "Hero project photo", tone: "dark" as const, body: "Seamless extensions that read as if they were always part of the original architecture." },
 ];
 
 const steps = [
   { n: "01", t: "Discovery", b: "An on-site walkthrough and conversation about how you live, entertain, and unwind." },
-  { n: "02", t: "Design Development", b: "Plans, elevations, and material boards developed in close collaboration with your architect." },
-  { n: "03", t: "Shop Drawings", b: "Every millwork piece engineered in-house and approved before a single board is cut." },
-  { n: "04", t: "Fabrication", b: "Cabinetry and architectural elements built by our own craftsmen in our Rye shop." },
-  { n: "05", t: "Installation", b: "A choreographed install protected by daily site standards and white-glove care." },
+  { n: "02", t: "Design Development", b: "Plans, elevations, and material boards developed with your architect." },
+  { n: "03", t: "Shop Drawings", b: "Every millwork piece engineered in-house and approved before a board is cut." },
+  { n: "04", t: "Fabrication", b: "Cabinetry built by our own craftsmen in our Rye shop." },
+  { n: "05", t: "Installation", b: "A choreographed install protected by daily site standards." },
   { n: "06", t: "Reveal", b: "Final walkthrough, owner training, and a five-year craftsmanship warranty." },
 ];
 
@@ -33,30 +34,31 @@ function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
+        eyebrow="Services · 01"
         title="Interior Renovations"
         sub="Kitchens, baths, and additions built with the precision of an in-house shop."
-        img="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2400&q=80"
+        label="Hero project photo"
+        tone="dark"
       />
-      <section className="container-luxe py-28">
-        <div className="grid gap-10 md:grid-cols-3">
+      <section className="container-wide py-28 md:py-36">
+        <div className="grid gap-x-6 gap-y-16 md:grid-cols-3">
           {focuses.map((f, i) => (
-            <Reveal key={f.title} delay={i * 100}>
-              <div className="aspect-[4/5] overflow-hidden mb-6">
-                <img src={f.img} alt={f.title} className="w-full h-full object-cover" />
+            <Reveal key={f.title} delay={i * 100} className={i === 1 ? "md:mt-20" : ""}>
+              <Placeholder label={f.label} tone={f.tone} ratio="4/5" />
+              <div className="pt-6">
+                <h3 className="font-serif text-2xl md:text-3xl mb-3">{f.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{f.body}</p>
               </div>
-              <h3 className="font-serif text-2xl mb-3">{f.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{f.body}</p>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="bg-secondary py-28">
+      <section className="bg-secondary py-28 md:py-36">
         <div className="container-luxe">
           <Reveal className="max-w-2xl mb-16">
             <p className="eyebrow mb-4">Our Process</p>
-            <h2 className="font-serif text-4xl md:text-5xl">Six steps. One standard.</h2>
+            <h2 className="display-serif text-[clamp(2rem,4vw,3.5rem)]">Six steps. One standard.</h2>
           </Reveal>
           <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
             {steps.map((s, i) => (
@@ -74,16 +76,36 @@ function Page() {
   );
 }
 
-export function PageHero({ eyebrow, title, sub, img }: { eyebrow: string; title: string; sub: string; img: string }) {
+export function PageHero({
+  eyebrow,
+  title,
+  sub,
+  label,
+  tone = "dark",
+  img,
+}: {
+  eyebrow: string;
+  title: string;
+  sub: string;
+  label?: string;
+  tone?: "light" | "mid" | "dark" | "warm";
+  /** @deprecated kept for backward compat — Placeholder used instead */
+  img?: string;
+}) {
+  void img;
   return (
-    <section className="relative h-[70vh] min-h-[520px] flex items-end overflow-hidden">
-      <img src={img} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-charcoal/20 to-charcoal/80" />
-      <div className="container-luxe relative z-10 pb-20 text-white">
+    <section className="relative h-[78vh] min-h-[560px] flex items-end overflow-hidden">
+      <Placeholder
+        label={label ?? "Hero project photo"}
+        tone={tone}
+        fill
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal/85 pointer-events-none" />
+      <div className="container-wide relative z-10 pb-20 md:pb-24 text-white">
         <Reveal>
-          <p className="eyebrow mb-6">{eyebrow}</p>
-          <h1 className="font-serif text-5xl md:text-7xl max-w-4xl leading-[1.05]">{title}</h1>
-          <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed">{sub}</p>
+          <p className="eyebrow text-white/80 mb-6">{eyebrow}</p>
+          <h1 className="display-serif text-[clamp(2.5rem,7vw,6.5rem)] max-w-5xl">{title}</h1>
+          <p className="mt-8 text-base md:text-xl text-white/75 max-w-2xl leading-relaxed">{sub}</p>
         </Reveal>
       </div>
     </section>

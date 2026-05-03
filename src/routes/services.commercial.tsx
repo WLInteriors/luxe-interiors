@@ -2,14 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { TrustBadge } from "@/components/trust-badge";
+import { Placeholder } from "@/components/placeholder";
 import { PageHero } from "./services.interior-renovations";
 
 export const Route = createFileRoute("/services/commercial")({
   head: () => ({
     meta: [
-      { title: "Commercial Services — Westchester Luxury Interiors" },
+      { title: "Commercial Buildouts — Westchester Luxury Interiors" },
       { name: "description", content: "SCA Prequalified, MBE/DBE certified general contractor for schools, hospitality, and developer projects." },
-      { property: "og:title", content: "Commercial Services" },
+      { property: "og:title", content: "Commercial Buildouts" },
       { property: "og:description", content: "SCA Prequalified general contractor for schools, hospitality, and developers." },
     ],
   }),
@@ -17,22 +18,23 @@ export const Route = createFileRoute("/services/commercial")({
 });
 
 const sectors = [
-  { t: "K–12 & SCA", b: "SCA Prequalified for New York City School Construction Authority projects.", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" },
-  { t: "Hospitality", b: "Hotels, restaurants, and members clubs delivered without disrupting operations.", img: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&w=1200&q=80" },
-  { t: "Developers", b: "Pre-construction, value engineering, and white-glove turnover for amenity-driven projects.", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" },
+  { t: "K–12 & SCA", b: "SCA Prequalified for New York City School Construction Authority projects.", label: "Commercial interior photo", tone: "mid" as const },
+  { t: "Hospitality", b: "Hotels, restaurants, and members clubs delivered without disrupting operations.", label: "Commercial interior photo", tone: "warm" as const },
+  { t: "Developers", b: "Pre-construction, value engineering, and white-glove turnover for amenity-driven projects.", label: "Commercial interior photo", tone: "dark" as const },
 ];
 
 function Page() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Commercial Services"
+        eyebrow="Services · 03"
+        title="Commercial Buildouts"
         sub="A trusted partner for institutional and hospitality clients across the Tri-State."
-        img="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80"
+        label="Commercial interior photo"
+        tone="dark"
       />
 
-      <section className="container-luxe py-20">
+      <section className="container-luxe py-24">
         <Reveal className="flex flex-wrap items-center justify-center gap-10">
           <TrustBadge label="SCA Prequalified" sub="NYC SCA" />
           <TrustBadge label="MBE Certified" sub="NY State" />
@@ -41,15 +43,16 @@ function Page() {
         </Reveal>
       </section>
 
-      <section className="container-luxe pb-28">
-        <div className="grid gap-6 md:grid-cols-3">
+      <section className="container-wide pb-32">
+        <div className="grid gap-x-6 gap-y-14 md:grid-cols-3">
           {sectors.map((s, i) => (
-            <Reveal key={s.t} delay={i * 100}>
-              <div className="relative aspect-[4/5] overflow-hidden mb-6">
-                <img src={s.img} alt={s.t} className="w-full h-full object-cover" />
+            <Reveal key={s.t} delay={i * 100} className={i === 1 ? "md:mt-16" : ""}>
+              <Placeholder label={s.label} tone={s.tone} ratio="4/5" />
+              <div className="pt-6">
+                <span className="text-[10px] tracking-[0.3em] uppercase text-gold">0{i + 1}</span>
+                <h3 className="font-serif text-2xl md:text-3xl mt-3 mb-3">{s.t}</h3>
+                <p className="text-muted-foreground leading-relaxed">{s.b}</p>
               </div>
-              <h3 className="font-serif text-2xl mb-3">{s.t}</h3>
-              <p className="text-muted-foreground leading-relaxed">{s.b}</p>
             </Reveal>
           ))}
         </div>

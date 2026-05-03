@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 interface Props {
-  before: string;
-  after: string;
+  beforeLabel: string;
+  afterLabel: string;
   alt: string;
+  before?: ReactNode; // optional custom node, otherwise Placeholder is used
+  after?: ReactNode;
 }
 
-export function BeforeAfterSlider({ before, after, alt }: Props) {
+import { Placeholder } from "./placeholder";
+
+export function BeforeAfterSlider({ beforeLabel, afterLabel, alt, before, after }: Props) {
   const [pos, setPos] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -55,20 +59,25 @@ export function BeforeAfterSlider({ before, after, alt }: Props) {
         if (e.key === "ArrowRight") setPos((p) => Math.min(100, p + 4));
       }}
     >
-      <img src={after} alt={`${alt} — after`} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
-      <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
-        <img
-          src={before}
-          alt={`${alt} — before`}
-          className="absolute inset-0 h-full object-cover"
-          style={{ width: `${100 / (pos / 100)}%`, maxWidth: "none" }}
-          draggable={false}
-        />
+      {/* AFTER (full background) */}
+      <div className="absolute inset-0">
+        {after ?? <Placeholder label={afterLabel} tone="light" className="!h-full" />}
       </div>
-      <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-[10px] tracking-[0.25em] uppercase">Before</div>
-      <div className="absolute top-4 right-4 px-3 py-1 bg-charcoal text-charcoal-foreground text-[10px] tracking-[0.25em] uppercase">After</div>
+
+      {/* BEFORE (clipped from left) */}
+      <div className="absolute inset-y-0 left-0 overflow-hidden" style={{ width: `${pos}%` }}>
+        <div className="absolute inset-y-0 left-0 h-full" style={{ width: containerRef.current?.clientWidth ?? "100%" }}>
+          {before ?? <Placeholder label={beforeLabel} tone="dark" className="!h-full" />}
+        </div>
+      </div>
+
+      {/* Tags */}
+      <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-charcoal/80 text-white text-[10px] tracking-[0.28em] uppercase backdrop-blur-md">Before</div>
+      <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-gold text-charcoal text-[10px] tracking-[0.28em] uppercase">After</div>
+
+      {/* Divider */}
       <div
-        className="absolute top-0 bottom-0 w-px bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.2)]"
+        className="absolute top-0 bottom-0 w-px bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.25)]"
         style={{ left: `${pos}%` }}
       >
         <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white shadow-elegant flex items-center justify-center">
