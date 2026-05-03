@@ -70,7 +70,7 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal/85 pointer-events-none" />
         <div className="absolute inset-0 grain pointer-events-none" />
 
-        <div className="container-wide relative z-10 pb-20 md:pb-28 text-white">
+        <div className="container-wide relative z-10 pb-44 md:pb-48 pt-32 text-white">
           <Reveal>
             <p className="eyebrow text-white/80 mb-8">
               <span className="text-gold">Est. 1987</span> &nbsp;·&nbsp; Westchester · NYC · Tri-State
