@@ -7,6 +7,7 @@ interface PlaceholderProps {
   ratio?: string; // e.g. "4/5", "16/10"
   src?: string;   // optional real image; label still overlays as a corner tag
   alt?: string;
+  fill?: boolean; // absolutely fill nearest positioned ancestor
 }
 
 const toneStyles: Record<NonNullable<PlaceholderProps["tone"]>, CSSProperties> = {
@@ -41,17 +42,20 @@ export function Placeholder({
   ratio,
   src,
   alt,
+  fill = false,
 }: PlaceholderProps) {
   const style: CSSProperties = {
-    ...(ratio ? { aspectRatio: ratio.replace("/", " / ") } : {}),
+    ...(ratio && !fill ? { aspectRatio: ratio.replace("/", " / ") } : {}),
     ...(src ? {} : toneStyles[tone]),
   };
 
   const isDark = tone === "dark" || tone === "mid" || !!src;
 
+  const positionClass = fill ? "absolute inset-0 w-full h-full" : "relative w-full";
+
   return (
     <div
-      className={`relative w-full overflow-hidden ${className}`}
+      className={`${positionClass} overflow-hidden ${className}`}
       style={style}
       role="img"
       aria-label={alt ?? label}
