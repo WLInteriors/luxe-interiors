@@ -98,7 +98,7 @@ export function PageHero({
       <Placeholder
         label={label ?? "Hero project photo"}
         tone={tone}
-        className="absolute inset-0 !w-full !h-full"
+        fill
       />
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-transparent to-charcoal/85 pointer-events-none" />
       <div className="container-wide relative z-10 pb-20 md:pb-24 text-white">

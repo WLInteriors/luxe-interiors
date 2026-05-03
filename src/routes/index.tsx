@@ -65,7 +65,7 @@ function HomePage() {
         <Placeholder
           label="Hero project photo"
           tone="dark"
-          className="absolute inset-0 !w-full !h-full"
+          fill
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal/85 pointer-events-none" />
         <div className="absolute inset-0 grain pointer-events-none" />
