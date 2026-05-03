@@ -115,18 +115,21 @@ function Page() {
       <PageHero
         eyebrow="Partnerships"
         title="Who we work with."
-        sub="Four kinds of clients. One uncompromising standard."
+        sub="Six kinds of clients. One uncompromising standard."
         label="Team/shop/process photo"
         tone="dark"
       />
 
       <nav className="border-b border-border bg-background/95 backdrop-blur-md sticky top-20 md:top-24 z-30">
-        <div className="container-wide flex flex-wrap gap-6 md:gap-10 py-5 text-[10px] tracking-[0.3em] uppercase font-medium text-muted-foreground">
-          {personas.map((p) => (
-            <a key={p.id} href={`#${p.id}`} className="hover:text-gold transition-colors">
-              {p.t}
-            </a>
-          ))}
+        <div className="container-wide flex flex-wrap gap-x-6 gap-y-3 md:gap-x-10 py-5 text-[10px] tracking-[0.3em] uppercase font-medium text-muted-foreground">
+          {personas.map((p) => {
+            const short = p.t.split(/[ &(]/)[0];
+            return (
+              <a key={p.id} href={`#${p.id}`} className="hover:text-gold transition-colors">
+                {short}
+              </a>
+            );
+          })}
         </div>
       </nav>
 
