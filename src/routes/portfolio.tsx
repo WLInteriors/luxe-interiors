@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
+import { Placeholder } from "@/components/placeholder";
 import { PageHero } from "./services.interior-renovations";
+import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
@@ -18,19 +20,21 @@ export const Route = createFileRoute("/portfolio")({
 
 type Cat = "All" | "Residential" | "Commercial" | "Millwork";
 
-const projects: { title: string; loc: string; cat: Exclude<Cat, "All">; img: string }[] = [
-  { title: "Modern Penthouse", loc: "Manhattan, NY", cat: "Residential", img: "https://images.unsplash.com/photo-1565182999561-18d7dc61c393?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Colonial Revival", loc: "Rye, NY", cat: "Residential", img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Hudson Estate Kitchen", loc: "Bronxville, NY", cat: "Residential", img: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Tribeca Loft", loc: "New York, NY", cat: "Residential", img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Greenwich Master Bath", loc: "Greenwich, CT", cat: "Residential", img: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Westchester Library", loc: "Scarsdale, NY", cat: "Millwork", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Hotel Lobby Refresh", loc: "Stamford, CT", cat: "Commercial", img: "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Boutique Office Build-out", loc: "Midtown, NYC", cat: "Commercial", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Walnut Wine Room", loc: "Larchmont, NY", cat: "Millwork", img: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Fluted Oak Foyer", loc: "Mamaroneck, NY", cat: "Millwork", img: "https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Charter School Atrium", loc: "Bronx, NY", cat: "Commercial", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Lakeside Retreat", loc: "Pound Ridge, NY", cat: "Residential", img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80" },
+type Tone = "light" | "mid" | "dark" | "warm";
+
+const projects: { title: string; loc: string; year: string; cat: Exclude<Cat, "All">; label: string; tone: Tone }[] = [
+  { title: "Modern Penthouse", loc: "Manhattan, NY", year: "2024", cat: "Residential", label: "Hero project photo", tone: "dark" },
+  { title: "Colonial Revival", loc: "Rye, NY", year: "2024", cat: "Residential", label: "Kitchen/casework detail", tone: "light" },
+  { title: "Hudson Estate Kitchen", loc: "Bronxville, NY", year: "2023", cat: "Residential", label: "Kitchen/casework detail", tone: "warm" },
+  { title: "Tribeca Loft", loc: "New York, NY", year: "2024", cat: "Residential", label: "Hero project photo", tone: "mid" },
+  { title: "Greenwich Master Bath", loc: "Greenwich, CT", year: "2023", cat: "Residential", label: "Bathroom vanity/millwork detail", tone: "warm" },
+  { title: "Westchester Library", loc: "Scarsdale, NY", year: "2023", cat: "Millwork", label: "Custom millwork shop photo", tone: "dark" },
+  { title: "Hotel Lobby Refresh", loc: "Stamford, CT", year: "2022", cat: "Commercial", label: "Commercial interior photo", tone: "warm" },
+  { title: "Boutique Office Buildout", loc: "Midtown, NYC", year: "2024", cat: "Commercial", label: "Commercial interior photo", tone: "mid" },
+  { title: "Walnut Wine Room", loc: "Larchmont, NY", year: "2023", cat: "Millwork", label: "Custom millwork shop photo", tone: "dark" },
+  { title: "Fluted Oak Foyer", loc: "Mamaroneck, NY", year: "2024", cat: "Millwork", label: "Custom millwork shop photo", tone: "warm" },
+  { title: "Charter School Atrium", loc: "Bronx, NY", year: "2022", cat: "Commercial", label: "Commercial interior photo", tone: "light" },
+  { title: "Lakeside Retreat", loc: "Pound Ridge, NY", year: "2023", cat: "Residential", label: "Hero project photo", tone: "mid" },
 ];
 
 const filters: Cat[] = ["All", "Residential", "Commercial", "Millwork"];
@@ -48,45 +52,60 @@ function Page() {
         eyebrow="Selected Work"
         title="Portfolio"
         sub="A measured archive of projects across Westchester, NYC, and the Tri-State."
-        img="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=2400&q=80"
+        label="Hero project photo"
+        tone="dark"
       />
 
-      <section className="container-luxe py-20">
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-14">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-6 py-3 text-[11px] tracking-[0.25em] uppercase font-medium border transition-all ${
-                active === f
-                  ? "bg-charcoal text-charcoal-foreground border-charcoal"
-                  : "border-border text-muted-foreground hover:border-gold hover:text-gold"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+      <section className="container-wide py-20 md:py-24">
+        <div className="flex flex-wrap items-center justify-between gap-6 mb-14 pb-6 border-b border-border">
+          <div className="flex flex-wrap items-center gap-2">
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => setActive(f)}
+                className={`px-5 py-3 text-[10px] tracking-[0.3em] uppercase font-medium transition-all ${
+                  active === f
+                    ? "bg-charcoal text-charcoal-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+            {filtered.length} {filtered.length === 1 ? "project" : "projects"}
+          </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((p) => (
-            <article key={p.title} className="group cursor-pointer animate-fade-in">
-              <div className="relative aspect-[4/5] overflow-hidden bg-muted">
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-background/90 text-[10px] tracking-[0.25em] uppercase">
-                  {p.cat}
+        <div className="grid gap-x-6 gap-y-16 md:grid-cols-12">
+          {filtered.map((p, i) => {
+            // Editorial staggered span pattern
+            const pattern = [
+              "md:col-span-7",
+              "md:col-span-5 md:mt-24",
+              "md:col-span-5",
+              "md:col-span-7 md:mt-12",
+              "md:col-span-6",
+              "md:col-span-6 md:mt-20",
+            ];
+            const span = pattern[i % pattern.length];
+            return (
+              <article key={p.title} className={`group cursor-pointer animate-fade-in ${span}`}>
+                <Placeholder label={p.label} tone={p.tone} ratio="4/5" />
+                <div className="pt-6 flex items-end justify-between gap-6">
+                  <div>
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">{p.cat}</p>
+                    <h3 className="font-serif text-2xl md:text-3xl">{p.title}</h3>
+                    <p className="text-[11px] tracking-[0.25em] uppercase text-muted-foreground mt-2">
+                      {p.loc} · {p.year}
+                    </p>
+                  </div>
+                  <ArrowUpRight size={20} className="text-foreground/40 group-hover:text-gold transition-colors flex-shrink-0" />
                 </div>
-              </div>
-              <div className="pt-5">
-                <h3 className="font-serif text-xl">{p.title}</h3>
-                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mt-1">{p.loc}</p>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {filtered.length === 0 && (
