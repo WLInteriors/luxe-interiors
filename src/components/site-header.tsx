@@ -36,39 +36,37 @@ export function SiteHeader() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         solid
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
+          ? "bg-background/92 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       }`}
     >
-      <div className="container-luxe flex items-center justify-between h-20">
-        <Link to="/" className="flex flex-col leading-none group">
-          <span
-            className={`font-serif text-xl tracking-tight ${
-              solid ? "text-foreground" : "text-white"
-            }`}
-          >
-            Westchester
-          </span>
-          <span
-            className={`text-[10px] tracking-[0.3em] uppercase mt-0.5 ${
-              solid ? "text-gold" : "text-gold"
-            }`}
-          >
-            Luxury Interiors
+      <div className="container-wide flex items-center justify-between h-20 md:h-24">
+        <Link to="/" className="flex items-center gap-3 group">
+          <span className={`w-2 h-2 rounded-full ${solid ? "bg-gold" : "bg-gold"}`} />
+          <span className="flex flex-col leading-none">
+            <span
+              className={`font-serif text-lg md:text-xl tracking-tight ${
+                solid ? "text-foreground" : "text-white"
+              }`}
+            >
+              Westchester
+            </span>
+            <span className="text-[9px] tracking-[0.32em] uppercase mt-1 text-gold">
+              Luxury Interiors
+            </span>
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-10">
-          <NavLink to="/" solid={solid}>Home</NavLink>
+        <nav className="hidden lg:flex items-center gap-9">
           <NavDropdown label="Services" items={services} solid={solid} />
           <NavDropdown label="Portfolio" items={portfolio} solid={solid} />
-          <NavLink to="/who-we-work-with" solid={solid}>Who We Work With</NavLink>
-          <NavLink to="/about" solid={solid}>About</NavLink>
+          <NavLink to="/who-we-work-with" solid={solid}>Clients</NavLink>
+          <NavLink to="/about" solid={solid}>Studio</NavLink>
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center px-5 py-2.5 bg-gold text-charcoal text-xs tracking-[0.2em] uppercase font-medium hover:bg-gold/90 transition-colors"
+            className="ml-2 inline-flex items-center gap-2 px-5 py-2.5 bg-gold text-charcoal text-[10px] tracking-[0.28em] uppercase font-medium hover:bg-foreground hover:text-background transition-colors"
           >
-            Request Consultation
+            Request Estimate
           </Link>
         </nav>
 
