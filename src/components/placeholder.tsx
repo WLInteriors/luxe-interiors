@@ -90,14 +90,16 @@ export function Placeholder({
   src,
   alt,
   fill = false,
+  showTag = false,
 }: PlaceholderProps) {
+  const resolvedSrc = src ?? LABEL_IMAGES[label];
+
   const style: CSSProperties = {
     ...(ratio && !fill ? { aspectRatio: ratio.replace("/", " / ") } : {}),
-    ...(src ? {} : toneStyles[tone]),
+    ...(resolvedSrc ? {} : toneStyles[tone]),
   };
 
-  const isDark = tone === "dark" || tone === "mid" || !!src;
-
+  const isDark = tone === "dark" || tone === "mid" || !!resolvedSrc;
   const positionClass = fill ? "absolute inset-0 w-full h-full" : "relative w-full";
 
   return (
@@ -107,16 +109,15 @@ export function Placeholder({
       role="img"
       aria-label={alt ?? label}
     >
-      {src ? (
+      {resolvedSrc ? (
         <img
-          src={src}
+          src={resolvedSrc}
           alt={alt ?? label}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
           loading="lazy"
         />
       ) : (
         <>
-          {/* Architectural cross-hairs */}
           <svg
             className="absolute inset-0 w-full h-full opacity-[0.08]"
             preserveAspectRatio="none"
@@ -134,17 +135,19 @@ export function Placeholder({
         </>
       )}
 
-      {/* Label tag */}
-      <div
-        className={`absolute left-4 top-4 z-10 inline-flex items-center gap-2 px-3 py-1.5 backdrop-blur-md text-[9px] tracking-[0.28em] uppercase font-medium ${
-          isDark
-            ? "bg-black/45 text-white/90 border border-white/15"
-            : "bg-white/80 text-foreground border border-black/10"
-        }`}
-      >
-        <span className="w-1 h-1 bg-gold rounded-full" />
-        {label}
-      </div>
+      {showTag && (
+        <div
+          className={`absolute left-4 top-4 z-10 inline-flex items-center gap-2 px-3 py-1.5 backdrop-blur-md text-[9px] tracking-[0.28em] uppercase font-medium ${
+            isDark
+              ? "bg-black/45 text-white/90 border border-white/15"
+              : "bg-white/80 text-foreground border border-black/10"
+          }`}
+        >
+          <span className="w-1 h-1 bg-gold rounded-full" />
+          {label}
+        </div>
+      )}
     </div>
   );
 }
+
