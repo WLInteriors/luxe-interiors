@@ -17,44 +17,67 @@ interface PlaceholderProps {
  * here automatically lights up real imagery in every section that requests it.
  */
 const LABEL_IMAGES: Record<string, string> = {
+  // Hero — sweeping luxury living space
   "Hero project photo":
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=80",
+
+  // Interior renovations — finished luxury kitchen with marble + custom cabinetry
+  "Kitchen/casework detail":
+    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2000&q=80",
+
+  // Custom millwork — finished paneled interior (warm wood)
   "Custom millwork shop photo":
-    "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=2000&q=80",
+    "https://images.unsplash.com/photo-1600573472556-e636c2acda88?auto=format&fit=crop&w=2000&q=80",
+
+  // Tour the Shop — actual woodworking shop / craftsman at bench
+  "Workshop interior":
+    "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=2000&q=80",
+
+  // Library — built-in floor-to-ceiling library / study
+  "Library millwork":
+    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=2000&q=80",
+
+  // Before / after
   "Before renovation photo":
     "https://images.unsplash.com/photo-1503594384566-461fe158e797?auto=format&fit=crop&w=2000&q=80",
   "After renovation photo":
-    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80",
-  "Kitchen/casework detail":
-    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=80",
+    "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=2000&q=80",
+
+  // Bath
   "Bathroom vanity/millwork detail":
-    "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=2000&q=80",
+    "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=2000&q=80",
+
+  // Commercial / hospitality / institutional
   "Commercial interior photo":
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80",
-  "Radiator cover photo":
-    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=2000&q=80",
-  "AC cover photo":
-    "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=2000&q=80",
-  "Team/shop/process photo":
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=2000&q=80",
+    "https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=2000&q=80",
   "Hotel interior photo":
     "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=80",
   "Boutique hotel lobby":
     "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=2000&q=80",
   "School interior photo":
     "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=2000&q=80",
+  "Office interior":
+    "https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=2000&q=80",
+
+  // Covers
+  "Radiator cover photo":
+    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=2000&q=80",
+  "AC cover photo":
+    "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&w=2000&q=80",
+
+  // Process / team
+  "Team/shop/process photo":
+    "https://images.unsplash.com/photo-1572297794755-a1cd34dcfd9b?auto=format&fit=crop&w=2000&q=80",
   "Architect drawings":
     "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=80",
-  "Library millwork":
-    "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=2000&q=80",
+
+  // Detail / interiors
   "Wood paneling detail":
     "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=2000&q=80",
   "Marble kitchen":
-    "https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=2000&q=80",
+    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=80",
   "Living room interior":
     "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80",
-  "Office interior":
-    "https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=2000&q=80",
 };
 
 const toneStyles: Record<NonNullable<PlaceholderProps["tone"]>, CSSProperties> = {
