@@ -51,10 +51,10 @@ const services = [
 ];
 
 const projects = [
-  { title: "Hudson Estate", loc: "Bronxville, NY", year: "2024", label: "Kitchen/casework detail", tone: "light" as const, ratio: "4/5" },
-  { title: "Tribeca Loft", loc: "New York, NY", year: "2024", label: "Hero project photo", tone: "dark" as const, ratio: "4/5" },
+  { title: "Hudson Estate", loc: "Bronxville, NY", year: "2024", label: "Marble kitchen", tone: "light" as const, ratio: "4/5" },
+  { title: "Tribeca Loft", loc: "New York, NY", year: "2024", label: "Living room interior", tone: "dark" as const, ratio: "4/5" },
   { title: "Greenwich Spa Bath", loc: "Greenwich, CT", year: "2023", label: "Bathroom vanity/millwork detail", tone: "warm" as const, ratio: "4/5" },
-  { title: "Westchester Library", loc: "Scarsdale, NY", year: "2023", label: "Custom millwork shop photo", tone: "mid" as const, ratio: "4/5" },
+  { title: "Westchester Library", loc: "Scarsdale, NY", year: "2023", label: "Library millwork", tone: "mid" as const, ratio: "4/5" },
 ];
 
 function HomePage() {
