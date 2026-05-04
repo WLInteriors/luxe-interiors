@@ -205,7 +205,7 @@ function HomePage() {
         <div className="grid lg:grid-cols-12 items-stretch min-h-[640px]">
           <div className="lg:col-span-7 relative min-h-[420px] lg:min-h-[640px]">
             <Placeholder
-              label="Custom millwork shop photo"
+              label="Workshop interior"
               tone="dark"
               fill
             />
