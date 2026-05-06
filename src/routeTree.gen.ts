@@ -18,6 +18,7 @@ import { Route as ServicesInteriorRenovationsRouteImport } from './routes/servic
 import { Route as ServicesCustomMillworkRouteImport } from './routes/services.custom-millwork'
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
 import { Route as PortfolioBeforeAfterRouteImport } from './routes/portfolio.before-after'
+import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 
 const WhoWeWorkWithRoute = WhoWeWorkWithRouteImport.update({
   id: '/who-we-work-with',
@@ -65,6 +66,11 @@ const PortfolioBeforeAfterRoute = PortfolioBeforeAfterRouteImport.update({
   path: '/before-after',
   getParentRoute: () => PortfolioRoute,
 } as any)
+const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
+  id: '/api/public/contact',
+  path: '/api/public/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/custom-millwork': typeof ServicesCustomMillworkRoute
   '/services/interior-renovations': typeof ServicesInteriorRenovationsRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/custom-millwork': typeof ServicesCustomMillworkRoute
   '/services/interior-renovations': typeof ServicesInteriorRenovationsRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/custom-millwork': typeof ServicesCustomMillworkRoute
   '/services/interior-renovations': typeof ServicesInteriorRenovationsRoute
+  '/api/public/contact': typeof ApiPublicContactRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -112,6 +121,7 @@ export interface FileRouteTypes {
     | '/services/commercial'
     | '/services/custom-millwork'
     | '/services/interior-renovations'
+    | '/api/public/contact'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/services/commercial'
     | '/services/custom-millwork'
     | '/services/interior-renovations'
+    | '/api/public/contact'
   id:
     | '__root__'
     | '/'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/services/commercial'
     | '/services/custom-millwork'
     | '/services/interior-renovations'
+    | '/api/public/contact'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   ServicesCommercialRoute: typeof ServicesCommercialRoute
   ServicesCustomMillworkRoute: typeof ServicesCustomMillworkRoute
   ServicesInteriorRenovationsRoute: typeof ServicesInteriorRenovationsRoute
+  ApiPublicContactRoute: typeof ApiPublicContactRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioBeforeAfterRouteImport
       parentRoute: typeof PortfolioRoute
     }
+    '/api/public/contact': {
+      id: '/api/public/contact'
+      path: '/api/public/contact'
+      fullPath: '/api/public/contact'
+      preLoaderRoute: typeof ApiPublicContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -236,6 +256,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesCommercialRoute: ServicesCommercialRoute,
   ServicesCustomMillworkRoute: ServicesCustomMillworkRoute,
   ServicesInteriorRenovationsRoute: ServicesInteriorRenovationsRoute,
+  ApiPublicContactRoute: ApiPublicContactRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
