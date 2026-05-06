@@ -74,8 +74,13 @@ function Page() {
             ];
             const span = pattern[i % pattern.length];
             return (
-              <article key={p.title} className={`group cursor-pointer animate-fade-in ${span}`}>
-                <Placeholder label={p.label} tone={p.tone} ratio="4/5" />
+              <Link
+                key={p.slug}
+                to="/portfolio/$slug"
+                params={{ slug: p.slug }}
+                className={`group block animate-fade-in ${span}`}
+              >
+                <Placeholder label={p.hero} alt={p.heroAlt} tone={p.tone} ratio="4/5" />
                 <div className="pt-6 flex items-end justify-between gap-6">
                   <div>
                     <p className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">{p.cat}</p>
@@ -86,7 +91,7 @@ function Page() {
                   </div>
                   <ArrowUpRight size={20} className="text-foreground/40 group-hover:text-gold transition-colors flex-shrink-0" />
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
