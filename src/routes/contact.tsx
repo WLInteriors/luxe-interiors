@@ -74,27 +74,57 @@ function Page() {
 
   const next = () => { if (validateStep()) setStep((s) => s + 1); };
   const back = () => setStep((s) => Math.max(1, s - 1));
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const fileInputsRef = useState<File[]>([])[0];
+  const [realFiles, setRealFiles] = useState<File[]>([]);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitError(null);
+    setSubmitting(true);
+    try {
+      const fd = new FormData();
+      fd.append("payload", JSON.stringify({
+        name: data.name, email: data.email, phone: data.phone, location: data.location,
+        sector: data.sector, projectType: data.projectType, budget: data.budget,
+        timeline: data.timeline, message: data.message,
+      }));
+      realFiles.forEach((f) => fd.append("files", f));
+      const res = await fetch("/api/public/contact", { method: "POST", body: fd });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || "Submission failed");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setSubmitting(false);
+    }
+    void fileInputsRef;
   };
 
   const onFiles = (files: FileList | null) => {
     if (!files) return;
-    const next: { name: string; size: number }[] = [...data.files];
+    const nextMeta: { name: string; size: number }[] = [...data.files];
+    const nextReal: File[] = [...realFiles];
     const errs: string[] = [];
     Array.from(files).forEach((f) => {
       if (f.size > 20 * 1024 * 1024) { errs.push(`${f.name} exceeds 20MB`); return; }
-      if (next.length >= 8) { errs.push("Up to 8 files"); return; }
-      next.push({ name: f.name, size: f.size });
+      if (nextMeta.length >= 8) { errs.push("Up to 8 files"); return; }
+      nextMeta.push({ name: f.name, size: f.size });
+      nextReal.push(f);
     });
     setErrors(errs.length ? { file: errs.join(" · ") } : {});
-    setData((d) => ({ ...d, files: next }));
+    setData((d) => ({ ...d, files: nextMeta }));
+    setRealFiles(nextReal);
   };
 
-  const removeFile = (i: number) =>
+  const removeFile = (i: number) => {
     setData((d) => ({ ...d, files: d.files.filter((_, idx) => idx !== i) }));
+    setRealFiles((r) => r.filter((_, idx) => idx !== i));
+  };
 
   return (
     <>
@@ -280,11 +310,12 @@ function Page() {
                       Continue <ArrowRight size={14} />
                     </button>
                   ) : (
-                    <button type="submit" className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-xs tracking-[0.25em] uppercase font-medium hover:bg-gold/90 transition-colors">
-                      Submit Inquiry <ArrowRight size={14} />
+                    <button type="submit" disabled={submitting} className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-xs tracking-[0.25em] uppercase font-medium hover:bg-gold/90 transition-colors disabled:opacity-60">
+                      {submitting ? "Sending…" : "Submit Inquiry"} <ArrowRight size={14} />
                     </button>
                   )}
                 </div>
+                {submitError && <p className="text-destructive text-sm mt-4 text-right">{submitError}</p>}
               </form>
             )}
           </div>

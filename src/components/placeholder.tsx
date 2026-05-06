@@ -78,6 +78,22 @@ const LABEL_IMAGES: Record<string, string> = {
     "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=2000&q=80",
   "Living room interior":
     "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80",
+
+  // Additional editorial labels for new pages
+  "Process drawings":
+    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=80",
+  "Craftsman portrait":
+    "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=2000&q=80",
+  "Shop floor wide":
+    "https://images.unsplash.com/photo-1567361808960-dec9cb578182?auto=format&fit=crop&w=2000&q=80",
+  "Hands at work":
+    "https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=2000&q=80",
+  "Blueprint detail":
+    "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=2000&q=80",
+  "Sample boards":
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",
+  "Team meeting":
+    "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2000&q=80",
 };
 
 const toneStyles: Record<NonNullable<PlaceholderProps["tone"]>, CSSProperties> = {
@@ -138,6 +154,7 @@ export function Placeholder({
           alt={alt ?? label}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
           loading="lazy"
+          decoding="async"
         />
       ) : (
         <>
