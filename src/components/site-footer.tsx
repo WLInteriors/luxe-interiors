@@ -5,7 +5,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-charcoal text-charcoal-foreground">
       <div className="container-luxe py-20">
-        <div className="grid gap-12 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="flex flex-col leading-none">
               <span className="font-serif text-2xl">Westchester</span>
@@ -36,14 +36,28 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs tracking-[0.25em] uppercase text-gold mb-5">Explore</h4>
+            <h4 className="text-xs tracking-[0.25em] uppercase text-gold mb-5">Work</h4>
             <ul className="space-y-3 text-sm text-white/70">
               <li><Link to="/services/interior-renovations" className="hover:text-gold transition-colors">Renovations</Link></li>
               <li><Link to="/services/custom-millwork" className="hover:text-gold transition-colors">Millwork</Link></li>
               <li><Link to="/services/commercial" className="hover:text-gold transition-colors">Commercial</Link></li>
               <li><Link to="/portfolio" className="hover:text-gold transition-colors">Portfolio</Link></li>
+              <li><Link to="/portfolio/before-after" className="hover:text-gold transition-colors">Before &amp; After</Link></li>
+              <li><Link to="/testimonials" className="hover:text-gold transition-colors">Testimonials</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs tracking-[0.25em] uppercase text-gold mb-5">Studio</h4>
+            <ul className="space-y-3 text-sm text-white/70">
               <li><Link to="/about" className="hover:text-gold transition-colors">About</Link></li>
-              <li><Link to="/contact" className="hover:text-gold transition-colors">Careers</Link></li>
+              <li><Link to="/about/our-process" className="hover:text-gold transition-colors">Our Process</Link></li>
+              <li><Link to="/about/millwork-shop" className="hover:text-gold transition-colors">Millwork Shop</Link></li>
+              <li><Link to="/about/certifications-affiliations" className="hover:text-gold transition-colors">Certifications</Link></li>
+              <li><Link to="/blog" className="hover:text-gold transition-colors">Journal</Link></li>
+              <li><Link to="/careers" className="hover:text-gold transition-colors">Careers</Link></li>
+              <li><Link to="/faqs" className="hover:text-gold transition-colors">FAQs</Link></li>
+              <li><Link to="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
             </ul>
           </div>
         </div>

@@ -11,6 +11,17 @@ const services = [
 const portfolio = [
   { to: "/portfolio", label: "Residential & Commercial" },
   { to: "/portfolio/before-after", label: "Before & After" },
+  { to: "/testimonials", label: "Client Testimonials" },
+] as const;
+
+const studio = [
+  { to: "/about", label: "About the Studio" },
+  { to: "/about/our-process", label: "Our Process" },
+  { to: "/about/millwork-shop", label: "The Millwork Shop" },
+  { to: "/about/certifications-affiliations", label: "Certifications" },
+  { to: "/blog", label: "Journal" },
+  { to: "/careers", label: "Careers" },
+  { to: "/faqs", label: "FAQs" },
 ] as const;
 
 export function SiteHeader() {
@@ -61,7 +72,7 @@ export function SiteHeader() {
           <NavDropdown label="Services" items={services} solid={solid} />
           <NavDropdown label="Portfolio" items={portfolio} solid={solid} />
           <NavLink to="/who-we-work-with" solid={solid}>Clients</NavLink>
-          <NavLink to="/about" solid={solid}>Studio</NavLink>
+          <NavDropdown label="Studio" items={studio} solid={solid} />
           <Link
             to="/contact"
             className="ml-2 inline-flex items-center gap-2 px-5 py-2.5 bg-gold text-charcoal text-[10px] tracking-[0.28em] uppercase font-medium hover:bg-foreground hover:text-background transition-colors"
@@ -86,7 +97,7 @@ export function SiteHeader() {
             <MobileGroup label="Services" items={services} />
             <MobileGroup label="Portfolio" items={portfolio} />
             <MobileLink to="/who-we-work-with">Who We Work With</MobileLink>
-            <MobileLink to="/about">About</MobileLink>
+            <MobileGroup label="Studio" items={studio} />
             <Link
               to="/contact"
               className="mt-4 inline-flex items-center justify-center px-5 py-3 bg-gold text-charcoal text-xs tracking-[0.2em] uppercase font-medium"
