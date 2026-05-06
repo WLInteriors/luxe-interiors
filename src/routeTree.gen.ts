@@ -10,14 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhoWeWorkWithRouteImport } from './routes/who-we-work-with'
+import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesInteriorRenovationsRouteImport } from './routes/services.interior-renovations'
 import { Route as ServicesCustomMillworkRouteImport } from './routes/services.custom-millwork'
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
 import { Route as PortfolioBeforeAfterRouteImport } from './routes/portfolio.before-after'
+import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AboutOurProcessRouteImport } from './routes/about.our-process'
+import { Route as AboutMillworkShopRouteImport } from './routes/about.millwork-shop'
+import { Route as AboutCertificationsAffiliationsRouteImport } from './routes/about.certifications-affiliations'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 
 const WhoWeWorkWithRoute = WhoWeWorkWithRouteImport.update({
@@ -25,14 +34,34 @@ const WhoWeWorkWithRoute = WhoWeWorkWithRouteImport.update({
   path: '/who-we-work-with',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestimonialsRoute = TestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -66,6 +95,32 @@ const PortfolioBeforeAfterRoute = PortfolioBeforeAfterRouteImport.update({
   path: '/before-after',
   getParentRoute: () => PortfolioRoute,
 } as any)
+const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PortfolioRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AboutOurProcessRoute = AboutOurProcessRouteImport.update({
+  id: '/our-process',
+  path: '/our-process',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutMillworkShopRoute = AboutMillworkShopRouteImport.update({
+  id: '/millwork-shop',
+  path: '/millwork-shop',
+  getParentRoute: () => AboutRoute,
+} as any)
+const AboutCertificationsAffiliationsRoute =
+  AboutCertificationsAffiliationsRouteImport.update({
+    id: '/certifications-affiliations',
+    path: '/certifications-affiliations',
+    getParentRoute: () => AboutRoute,
+  } as any)
 const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
   id: '/api/public/contact',
   path: '/api/public/contact',
@@ -74,10 +129,19 @@ const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
+  '/blog': typeof BlogRouteWithChildren
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
   '/portfolio': typeof PortfolioRouteWithChildren
+  '/testimonials': typeof TestimonialsRoute
   '/who-we-work-with': typeof WhoWeWorkWithRoute
+  '/about/certifications-affiliations': typeof AboutCertificationsAffiliationsRoute
+  '/about/millwork-shop': typeof AboutMillworkShopRoute
+  '/about/our-process': typeof AboutOurProcessRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
   '/portfolio/before-after': typeof PortfolioBeforeAfterRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/custom-millwork': typeof ServicesCustomMillworkRoute
@@ -86,10 +150,19 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
+  '/blog': typeof BlogRouteWithChildren
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
   '/portfolio': typeof PortfolioRouteWithChildren
+  '/testimonials': typeof TestimonialsRoute
   '/who-we-work-with': typeof WhoWeWorkWithRoute
+  '/about/certifications-affiliations': typeof AboutCertificationsAffiliationsRoute
+  '/about/millwork-shop': typeof AboutMillworkShopRoute
+  '/about/our-process': typeof AboutOurProcessRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
   '/portfolio/before-after': typeof PortfolioBeforeAfterRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/custom-millwork': typeof ServicesCustomMillworkRoute
@@ -99,10 +172,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/about': typeof AboutRouteWithChildren
+  '/blog': typeof BlogRouteWithChildren
+  '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
+  '/faqs': typeof FaqsRoute
   '/portfolio': typeof PortfolioRouteWithChildren
+  '/testimonials': typeof TestimonialsRoute
   '/who-we-work-with': typeof WhoWeWorkWithRoute
+  '/about/certifications-affiliations': typeof AboutCertificationsAffiliationsRoute
+  '/about/millwork-shop': typeof AboutMillworkShopRoute
+  '/about/our-process': typeof AboutOurProcessRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
   '/portfolio/before-after': typeof PortfolioBeforeAfterRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/custom-millwork': typeof ServicesCustomMillworkRoute
@@ -114,9 +196,18 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/blog'
+    | '/careers'
     | '/contact'
+    | '/faqs'
     | '/portfolio'
+    | '/testimonials'
     | '/who-we-work-with'
+    | '/about/certifications-affiliations'
+    | '/about/millwork-shop'
+    | '/about/our-process'
+    | '/blog/$slug'
+    | '/portfolio/$slug'
     | '/portfolio/before-after'
     | '/services/commercial'
     | '/services/custom-millwork'
@@ -126,9 +217,18 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/blog'
+    | '/careers'
     | '/contact'
+    | '/faqs'
     | '/portfolio'
+    | '/testimonials'
     | '/who-we-work-with'
+    | '/about/certifications-affiliations'
+    | '/about/millwork-shop'
+    | '/about/our-process'
+    | '/blog/$slug'
+    | '/portfolio/$slug'
     | '/portfolio/before-after'
     | '/services/commercial'
     | '/services/custom-millwork'
@@ -138,9 +238,18 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/blog'
+    | '/careers'
     | '/contact'
+    | '/faqs'
     | '/portfolio'
+    | '/testimonials'
     | '/who-we-work-with'
+    | '/about/certifications-affiliations'
+    | '/about/millwork-shop'
+    | '/about/our-process'
+    | '/blog/$slug'
+    | '/portfolio/$slug'
     | '/portfolio/before-after'
     | '/services/commercial'
     | '/services/custom-millwork'
@@ -150,9 +259,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  AboutRoute: typeof AboutRouteWithChildren
+  BlogRoute: typeof BlogRouteWithChildren
+  CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
+  FaqsRoute: typeof FaqsRoute
   PortfolioRoute: typeof PortfolioRouteWithChildren
+  TestimonialsRoute: typeof TestimonialsRoute
   WhoWeWorkWithRoute: typeof WhoWeWorkWithRoute
   ServicesCommercialRoute: typeof ServicesCommercialRoute
   ServicesCustomMillworkRoute: typeof ServicesCustomMillworkRoute
@@ -169,6 +282,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhoWeWorkWithRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/testimonials': {
+      id: '/testimonials'
+      path: '/testimonials'
+      fullPath: '/testimonials'
+      preLoaderRoute: typeof TestimonialsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
@@ -176,11 +296,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -225,6 +366,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioBeforeAfterRouteImport
       parentRoute: typeof PortfolioRoute
     }
+    '/portfolio/$slug': {
+      id: '/portfolio/$slug'
+      path: '/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof PortfolioSlugRouteImport
+      parentRoute: typeof PortfolioRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/about/our-process': {
+      id: '/about/our-process'
+      path: '/our-process'
+      fullPath: '/about/our-process'
+      preLoaderRoute: typeof AboutOurProcessRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/millwork-shop': {
+      id: '/about/millwork-shop'
+      path: '/millwork-shop'
+      fullPath: '/about/millwork-shop'
+      preLoaderRoute: typeof AboutMillworkShopRouteImport
+      parentRoute: typeof AboutRoute
+    }
+    '/about/certifications-affiliations': {
+      id: '/about/certifications-affiliations'
+      path: '/certifications-affiliations'
+      fullPath: '/about/certifications-affiliations'
+      preLoaderRoute: typeof AboutCertificationsAffiliationsRouteImport
+      parentRoute: typeof AboutRoute
+    }
     '/api/public/contact': {
       id: '/api/public/contact'
       path: '/api/public/contact'
@@ -235,11 +411,37 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AboutRouteChildren {
+  AboutCertificationsAffiliationsRoute: typeof AboutCertificationsAffiliationsRoute
+  AboutMillworkShopRoute: typeof AboutMillworkShopRoute
+  AboutOurProcessRoute: typeof AboutOurProcessRoute
+}
+
+const AboutRouteChildren: AboutRouteChildren = {
+  AboutCertificationsAffiliationsRoute: AboutCertificationsAffiliationsRoute,
+  AboutMillworkShopRoute: AboutMillworkShopRoute,
+  AboutOurProcessRoute: AboutOurProcessRoute,
+}
+
+const AboutRouteWithChildren = AboutRoute._addFileChildren(AboutRouteChildren)
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface PortfolioRouteChildren {
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
   PortfolioBeforeAfterRoute: typeof PortfolioBeforeAfterRoute
 }
 
 const PortfolioRouteChildren: PortfolioRouteChildren = {
+  PortfolioSlugRoute: PortfolioSlugRoute,
   PortfolioBeforeAfterRoute: PortfolioBeforeAfterRoute,
 }
 
@@ -249,9 +451,13 @@ const PortfolioRouteWithChildren = PortfolioRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  AboutRoute: AboutRouteWithChildren,
+  BlogRoute: BlogRouteWithChildren,
+  CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
+  FaqsRoute: FaqsRoute,
   PortfolioRoute: PortfolioRouteWithChildren,
+  TestimonialsRoute: TestimonialsRoute,
   WhoWeWorkWithRoute: WhoWeWorkWithRoute,
   ServicesCommercialRoute: ServicesCommercialRoute,
   ServicesCustomMillworkRoute: ServicesCustomMillworkRoute,
