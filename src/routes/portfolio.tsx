@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { Placeholder } from "@/components/placeholder";
 import { PageHero } from "./services.interior-renovations";
+import { projects } from "@/lib/projects";
 import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/portfolio")({
@@ -19,23 +19,6 @@ export const Route = createFileRoute("/portfolio")({
 });
 
 type Cat = "All" | "Residential" | "Commercial" | "Millwork";
-
-type Tone = "light" | "mid" | "dark" | "warm";
-
-const projects: { title: string; loc: string; year: string; cat: Exclude<Cat, "All">; label: string; tone: Tone }[] = [
-  { title: "Modern Penthouse", loc: "Manhattan, NY", year: "2024", cat: "Residential", label: "Hero project photo", tone: "dark" },
-  { title: "Colonial Revival", loc: "Rye, NY", year: "2024", cat: "Residential", label: "Kitchen/casework detail", tone: "light" },
-  { title: "Hudson Estate Kitchen", loc: "Bronxville, NY", year: "2023", cat: "Residential", label: "Kitchen/casework detail", tone: "warm" },
-  { title: "Tribeca Loft", loc: "New York, NY", year: "2024", cat: "Residential", label: "Hero project photo", tone: "mid" },
-  { title: "Greenwich Master Bath", loc: "Greenwich, CT", year: "2023", cat: "Residential", label: "Bathroom vanity/millwork detail", tone: "warm" },
-  { title: "Westchester Library", loc: "Scarsdale, NY", year: "2023", cat: "Millwork", label: "Library millwork", tone: "dark" },
-  { title: "Hotel Lobby Refresh", loc: "Stamford, CT", year: "2022", cat: "Commercial", label: "Boutique hotel lobby", tone: "warm" },
-  { title: "Boutique Office Buildout", loc: "Midtown, NYC", year: "2024", cat: "Commercial", label: "Office interior", tone: "mid" },
-  { title: "Walnut Wine Room", loc: "Larchmont, NY", year: "2023", cat: "Millwork", label: "Wood paneling detail", tone: "dark" },
-  { title: "Fluted Oak Foyer", loc: "Mamaroneck, NY", year: "2024", cat: "Millwork", label: "Custom millwork shop photo", tone: "warm" },
-  { title: "Charter School Atrium", loc: "Bronx, NY", year: "2022", cat: "Commercial", label: "Commercial interior photo", tone: "light" },
-  { title: "Lakeside Retreat", loc: "Pound Ridge, NY", year: "2023", cat: "Residential", label: "Hero project photo", tone: "mid" },
-];
 
 const filters: Cat[] = ["All", "Residential", "Commercial", "Millwork"];
 
