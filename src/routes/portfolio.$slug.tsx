@@ -3,7 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { Placeholder } from "@/components/placeholder";
 import { PageHero } from "./services.interior-renovations";
-import { getProject, getRelatedProjects } from "@/lib/projects";
+import { getProject, getRelatedProjects, type Project } from "@/lib/projects";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/portfolio/$slug")({
@@ -82,7 +82,7 @@ function Page() {
             <div>
               <p className="eyebrow mb-4">Featured Detail</p>
               <ul className="space-y-3">
-                {p.features.map((f) => (
+                {p.features.map((f: string) => (
                   <li key={f} className="flex items-start gap-3 border-t border-border pt-3">
                     <span className="text-gold mt-1.5">◆</span>
                     <span>{f}</span>
@@ -100,7 +100,7 @@ function Page() {
 
       <section className="container-wide pb-24">
         <div className="grid gap-6 md:grid-cols-2">
-          {p.gallery.map((g, i) => (
+          {p.gallery.map((g: Project["gallery"][number], i: number) => (
             <Reveal key={`${g.label}-${i}`} delay={i * 80} className={i % 3 === 1 ? "md:mt-16" : ""}>
               <Placeholder label={g.label} alt={g.alt} tone={p.tone} ratio="4/5" />
             </Reveal>
@@ -127,7 +127,7 @@ function Page() {
           </div>
         </Reveal>
         <div className="grid gap-x-6 gap-y-12 md:grid-cols-3">
-          {related.map((r) => (
+          {related.map((r: Project) => (
             <Link
               key={r.slug}
               to="/portfolio/$slug"

@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Reveal } from "@/components/reveal";
 import { CtaSection } from "@/components/cta-section";
 import { Placeholder } from "@/components/placeholder";
-import { getPost, posts, renderBody } from "@/lib/blog";
+import { getPost, posts, renderBody, type BlogPost } from "@/lib/blog";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -98,7 +98,7 @@ function Page() {
             <h2 className="display-serif text-[clamp(1.75rem,3vw,2.75rem)]">More from the journal</h2>
           </Reveal>
           <div className="grid gap-x-6 gap-y-12 md:grid-cols-2">
-            {related.map((r) => (
+            {related.map((r: BlogPost) => (
               <Link key={r.slug} to="/blog/$slug" params={{ slug: r.slug }} className="group block">
                 <Placeholder label={r.cover} alt={r.coverAlt} tone="mid" ratio="16/10" />
                 <div className="pt-5 flex items-start justify-between gap-4">
