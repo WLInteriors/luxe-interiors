@@ -310,11 +310,12 @@ function Page() {
                       Continue <ArrowRight size={14} />
                     </button>
                   ) : (
-                    <button type="submit" className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-xs tracking-[0.25em] uppercase font-medium hover:bg-gold/90 transition-colors">
-                      Submit Inquiry <ArrowRight size={14} />
+                    <button type="submit" disabled={submitting} className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-xs tracking-[0.25em] uppercase font-medium hover:bg-gold/90 transition-colors disabled:opacity-60">
+                      {submitting ? "Sending…" : "Submit Inquiry"} <ArrowRight size={14} />
                     </button>
                   )}
                 </div>
+                {submitError && <p className="text-destructive text-sm mt-4 text-right">{submitError}</p>}
               </form>
             )}
           </div>
